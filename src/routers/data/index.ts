@@ -1,0 +1,1 @@
+export {default as _pageRoutes_} from "./_page_routes_.ts";

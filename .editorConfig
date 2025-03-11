@@ -1,0 +1,11 @@
+[*]
+root = true
+
+[*.html]
+indent_style = tab
+tab_size = 4
+
+[./src/**/*.{jsx, tsx}]
+indent_style = tab
+tab_size = 4
+trim_trailing_whitespace = true

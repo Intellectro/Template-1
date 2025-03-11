@@ -1,0 +1,42 @@
+.banner__font {
+    font-family: "Righteous", sans-serif;
+    color: #7985c7;
+}
+
+@keyframes bouncy-image {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.bounce__image {
+    animation: bouncy-image 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    transition: transform 0.3s ease;
+}
+
+.phone__gradient {
+    background: linear-gradient(
+        to right,
+        #7083c8 -50%,
+        #e2bfcb 33%,
+        #d098b3 86%,
+        #7083c8 110%
+    );
+}
+
+.bubbling {
+    background: linear-gradient(
+        to right,
+        #7083c8 -50%,
+        #e2bfcb 33%,
+        #d098b3 86%,
+        #7083c8 110%
+    );
+    transition: background 0.8s ease-in-out;
+}
