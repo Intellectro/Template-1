@@ -17,7 +17,7 @@ const pageRoutes: Array<PageRouteProps> = [
     },
     {
         id: 3,
-        _path: "#contact",
+        _path: "#core",
         _name: "Contact"
     }
 ]

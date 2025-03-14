@@ -1,7 +1,9 @@
 import { logo } from "@/assets";
 import AnimatedTitle from "@/components/ui/AnimatedTitle";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import swal from "sweetalert";
 
 const FooterWrapper = styled.footer``;
 
@@ -20,6 +22,23 @@ const FooterField = styled.div``;
 
 const FooterButton = styled.button``;
 const Footer = () => {
+    const [emailVal, setEmailVal] = useState<string>("");
+    const emailRegex = new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$');
+    const handleSubmitEmail = () => {
+        if (!emailVal) {
+            swal("Empty Field Detected", "Kindly Insert Your Email And Try Again, Werey!😡", "error");
+            return;
+        }
+        if (!emailRegex.test(emailVal)) {
+            swal("For Your Mind You wan deceive your papa naa😒😤", "Quietly Put Your Email, Make we no fight", "warning");
+            return;
+        }
+        swal("You've successfully Subscribed To Our Newsletter", "You'll Be Notified Once There's Any New Features, Stay Tune🙂!", "success");
+        setEmailVal("");
+    }
+    useEffect(() => {
+        console.log(emailVal);
+    }, [])
     return(
         <FooterWrapper className="px-10 md:px-30 relative z-10">
             <FooterInnerBox className="w-full md:w-[90%] pt-5 pb-10 px-5 mx-auto rounded-tr-2xl rounded-tl-2xl -mt-10 shadow-xl text-center">
@@ -62,8 +81,8 @@ const Footer = () => {
                     <FooterFieldBox className="flex flex-col gap-y-2 items-center">
                         <FooterFieldTitle className="text-[17.5px] font-[550] tracking-wide">Join Our Newsletter</FooterFieldTitle>
                         <FooterField className="flex pr-3 py-2 border border-drop-shadow rounded-2xl">
-                            <input type="text" className="w-full py-1 px-4 focus:outline-none" />
-                            <button className="phone__gradient px-3 py-1 rounded-sm">Submit</button>
+                            <input onChange={(e) => setEmailVal(e.currentTarget.value)} value={emailVal} type="text" className="w-full py-1 px-4 focus:outline-none" />
+                            <button onClick={handleSubmitEmail} className="phone__gradient px-3 py-1 rounded-sm">Submit</button>
                         </FooterField>
                     </FooterFieldBox>
                 </FooterBox>

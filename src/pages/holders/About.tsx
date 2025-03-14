@@ -1,12 +1,16 @@
 import { cleaner } from "@/assets";
 import Demarcator from "@/components/ui/Demarcator";
-import { ReactNode} from "react";
+import { forwardRef, ReactNode} from "react";
 import styled from "styled-components";
 import React from "react";
 import AnimatedTitle from "@/components/ui/AnimatedTitle";
 
-interface Aboutprops {
+interface AboutStackprops {
     children: ReactNode;
+}
+
+interface AboutProps {
+    id: string;
 }
 
 const AboutWrapper = styled.div`
@@ -17,8 +21,9 @@ const ImageHolder = styled.div``;
 const ContentHolder = styled.div``;
 const ContentText = styled.div``;
 const ColumnBox = styled.div``;
+const AboutFragment = styled.div``;
 
-const AboutStack: React.FC<Aboutprops> = ({children}) => {
+const AboutStack: React.FC<AboutStackprops> = ({children}) => {
     return(
         <div className="w-full flex flex-col md:flex-row gap-x-5 gap-y-6">
             {children}
@@ -26,10 +31,10 @@ const AboutStack: React.FC<Aboutprops> = ({children}) => {
     );
 }
 
-const About = () => {
+const About = forwardRef<HTMLDivElement, AboutProps>(({id}, ref: React.Ref<HTMLDivElement>) => {
 
     return(
-        <React.Fragment>
+        <AboutFragment ref={ref} className="w-full" id={id}>
             <Demarcator title="About" reverse={true} />
             <AboutWrapper className="py-10 px-10 md:px-32" id="about">
                 <AboutStack>
@@ -46,8 +51,8 @@ const About = () => {
                     </ContentHolder>
                 </AboutStack>
             </AboutWrapper>
-        </React.Fragment>
+        </AboutFragment>
     );
-}
+})
 
 export default About;

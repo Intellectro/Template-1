@@ -11,9 +11,10 @@ import {motion} from "framer-motion";
 interface NavbarProps {
     isOpen: boolean;
     handleToggleMenu: () => void;
+    handleHashPath: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({isOpen, handleToggleMenu}) => {
+const Navbar: React.FC<NavbarProps> = ({isOpen, handleToggleMenu, handleHashPath}) => {
     const _elementsRef = useRef<(HTMLAnchorElement | null)[]>([]);
     const displayHoverEffect = (e: React.MouseEvent<HTMLElement>) => {
         if ("stopPropagation" in e) e.stopPropagation();
@@ -40,7 +41,7 @@ const Navbar: React.FC<NavbarProps> = ({isOpen, handleToggleMenu}) => {
                     {_pageRoutes_.map((_route_, index) => (
                         <Link onMouseOver={displayHoverEffect} ref={(el) => {
                             if (el) _elementsRef.current[index] = el;
-                        }} to={_route_._path} key={index}>
+                        }} onClick={handleHashPath} to={_route_._path} key={index}>
                             <div className="text-[16.5px] capitalize">{_route_._name}</div>
                         </Link>
                     ))}
@@ -48,8 +49,8 @@ const Navbar: React.FC<NavbarProps> = ({isOpen, handleToggleMenu}) => {
                 <div className="w-[35px] h-[35px] rounded-full bg-linear-[to_right,#7083c8_-50%,#e2bfcb_33%,#d098b3_86%,#7083c8_110%] flex justify-center items-center">
                     <FiPhone className="text-white" />
                 </div>
-                {!isOpen && <motion.div initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{duration: 0.4, delay: 0.1, ease: "linear"}}><RiMenu3Line className="block md:hidden text-[20px]" onClick={handleToggleMenu} /></motion.div>}
-                {isOpen && <motion.div initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{duration: 0.4, delay: 0.1, ease: "linear"}}><LiaTimesSolid className="block md:hidden text-[20px]" onClick={handleToggleMenu} /></motion.div>}
+                {!isOpen && <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{duration: 0.4, delay: 0.1, ease: "linear"}}><RiMenu3Line className="block md:hidden text-[20px]" onClick={handleToggleMenu} /></motion.div>}
+                {isOpen && <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{duration: 0.4, delay: 0.1, ease: "linear"}}><LiaTimesSolid className="block md:hidden text-[20px]" onClick={handleToggleMenu} /></motion.div>}
             </div>
         </div>
     );

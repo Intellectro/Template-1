@@ -6,6 +6,11 @@ import { useSelector } from "react-redux";
 import { CardContentsProps } from "@/types/_cardcontents";
 import { RootState } from "@/store/store";
 import { bubbleImage } from "@/assets";
+import { forwardRef } from "react";
+
+interface ServicesProps {
+    id: string;
+}
 
 const MiniTitle = styled.div``;
 
@@ -32,12 +37,12 @@ const ServicesWrapper = styled.div`
 const ServicesInnerShadow = styled.div``;
 
 
-const Services = () => {
+const Services = forwardRef<HTMLDivElement, ServicesProps>(({id}, ref: React.Ref<HTMLDivElement>) => {
     const _cardcontents: Array<CardContentsProps> = useSelector((state: RootState) => state._contents);
     const isPhoneView = useSelector((state: RootState) => state.isphoneview.isPhoneView);
 
     return(
-        <ServicesWrapper id="services" className="relative z-10">
+        <ServicesWrapper ref={ref} id={id} className="relative z-10">
             <Demarcator title="Services" reverse={false} />
             <ColumnFlexbox>
                 <TitleHolder title="What We Can Do For You?" />
@@ -53,6 +58,6 @@ const Services = () => {
             <img className="absolute -z-10 object-contain object-center left-[10%] top-[-2%]" src={bubbleImage} alt={bubbleImage.split("/").pop()?.split(".")[0]} />
         </ServicesWrapper>
     );
-}
+});
 
 export default Services;
